@@ -18,6 +18,5 @@ public class Special{
     SpecialAttack specialAttack2;
     SpecialAttack specialAttack3;
     SpecialAttack specialAttack4;
-    SpecialDefence specialDefence;
 
 }

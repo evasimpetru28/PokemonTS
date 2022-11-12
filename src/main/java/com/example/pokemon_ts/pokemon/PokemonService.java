@@ -1,8 +1,9 @@
 package com.example.pokemon_ts.pokemon;
 
-import com.example.pokemon_ts.PokemonTsApplication;
 import com.example.pokemon_ts.numbersgenerator.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Random;
@@ -13,27 +14,28 @@ import java.util.Random;
 public class PokemonService {
 
     public Pokemon getNewPokemon() {
-        var probability = new Probability();
-        var accuracy = new Accuracy();
         var hp = new HP();
         var speed = new Speed();
         var isSpecial = new Random().nextBoolean();
+        var defence = new Defence();
+        var specialDefence = new SpecialDefence();
         if (isSpecial) {
             var specialType = new Special();
-            specialType.setSpecialAttack1(new SpecialAttack(probability, accuracy));
-            specialType.setSpecialAttack2(new SpecialAttack(probability, accuracy));
-            specialType.setSpecialAttack3(new SpecialAttack(probability, accuracy));
-            specialType.setSpecialAttack4(new SpecialAttack(probability, accuracy));
-            specialType.setSpecialDefence(new SpecialDefence());
-            return new Pokemon(specialType, hp, speed);
+            specialType.setSpecialAttack1(new SpecialAttack(new Accuracy()));
+            specialType.setSpecialAttack2(new SpecialAttack(new Accuracy()));
+            specialType.setSpecialAttack3(new SpecialAttack(new Accuracy()));
+            specialType.setSpecialAttack4(new SpecialAttack(new Accuracy()));
+            return new Pokemon(specialType, hp, speed, specialDefence, defence);
         }
-        var physicalType = new Physical();
-        physicalType.setAttack1(new Attack(probability, accuracy));
-        physicalType.setAttack2(new Attack(probability, accuracy));
-        physicalType.setAttack3(new Attack(probability, accuracy));
-        physicalType.setAttack4(new Attack(probability, accuracy));
-        physicalType.setDefence(new Defence());
-        return new Pokemon(physicalType, hp, speed);
+        else {
+            var physicalType = new Physical();
+            physicalType.setAttack1(new Attack(new Accuracy()));
+            physicalType.setAttack2(new Attack(new Accuracy()));
+            physicalType.setAttack3(new Attack(new Accuracy()));
+            physicalType.setAttack4(new Attack(new Accuracy()));
+            return new Pokemon(physicalType, hp, speed, specialDefence, defence);
+        }
+
     }
 
 }

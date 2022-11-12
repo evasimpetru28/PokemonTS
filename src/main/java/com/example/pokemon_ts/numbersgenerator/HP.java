@@ -10,8 +10,8 @@ import java.util.Random;
 
 @Setter
 @Getter
-@FieldDefaults(makeFinal=true, level= AccessLevel.PRIVATE)
-@AllArgsConstructor
+@FieldDefaults(level= AccessLevel.PRIVATE)
+//@AllArgsConstructor
 public class HP {
 
     Integer value = new Random().nextInt(10, 1000);

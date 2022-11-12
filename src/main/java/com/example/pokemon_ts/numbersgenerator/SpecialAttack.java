@@ -15,7 +15,6 @@ import java.util.Random;
 public class SpecialAttack {
 
     Integer power = new Random().nextInt(10, 250);
-    Probability probability;
     Accuracy accuracy;
 
 }

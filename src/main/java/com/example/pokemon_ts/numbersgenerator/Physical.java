@@ -16,6 +16,5 @@ public class Physical {
     Attack attack2;
     Attack attack3;
     Attack attack4;
-    Defence defence;
 
 }

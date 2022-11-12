@@ -15,18 +15,51 @@ public class MonteCarlo {
     public void getEstimationOfWinning() {
         boolean playerStarts = false;
         int i = 1;
-        while (i <= 1000000000) {
+        double favourable = 0;
+        double total = 0;
+        while (i <= 100) {
+            i++;
+
             Pokemon enemyPokemon = pokemonService.getNewPokemon();
             Pokemon playerPokemon = pokemonService.getNewPokemon();
-            i++;
+
             if (enemyPokemon.getSpeed().getValue() < playerPokemon.getSpeed().getValue()) {
                 playerStarts = true;
             }
+
             BattleRound battleRound = new BattleRound();
-            battleRound.fight(playerPokemon, enemyPokemon, playerStarts);
-            var x = getMultiplier(playerPokemon, enemyPokemon);
-            System.out.println(x);
+
+            var multiplierForPlayer = getMultiplier(playerPokemon, enemyPokemon);
+            var multiplierForEnemy = getMultiplier(enemyPokemon, playerPokemon);
+
+            Integer playerLife;
+            Integer enemyLife;
+
+            while (true) {
+                playerLife = playerPokemon.getHp().getValue();
+                enemyLife = enemyPokemon.getHp().getValue();
+
+                if (battleIsFinished(playerLife, enemyLife)) {
+                    break;
+                }
+                battleRound.fight(playerPokemon, enemyPokemon, playerStarts, multiplierForPlayer, multiplierForEnemy);
+            }
+            if (checkIfPlayerWon(playerLife)) {
+                favourable ++;
+            }
+            total ++;
         }
+
+        System.out.println(favourable + " " + total);
+        System.out.println(favourable/total);
+    }
+
+    private boolean battleIsFinished(Integer playerLife, Integer enemyLife) {
+        return playerLife <= 0 || enemyLife <= 0;
+    }
+
+    public boolean checkIfPlayerWon(int hp) {
+        return hp > 0;
     }
 
     public Double getMultiplier(Pokemon playerPokemon, Pokemon enemyPokemon) {
@@ -55,64 +88,26 @@ public class MonteCarlo {
     }
 
     private Integer getTypeNumber(Pokemon pokemon) {
-        int number;
-        switch (pokemon.getTypeName()) {
-            case "Normal":
-                number = 1;
-                break;
-            case "Fighting":
-                number = 7;
-                break;
-            case "Poison":
-                number = 8;
-                break;
-            case "Ground":
-                number = 9;
-                break;
-            case "Flying":
-                number = 10;
-                break;
-            case "Bug":
-                number = 12;
-                break;
-            case "Rock":
-                number = 13;
-                break;
-            case "Ghost":
-                number = 14;
-                break;
-            case "Steel":
-                number = 17;
-                break;
-            case "Fire":
-                number = 2;
-                break;
-            case "Water":
-                number = 3;
-                break;
-            case "Electric":
-                number = 4;
-                break;
-            case "Grass":
-                number = 5;
-                break;
-            case "Ice":
-                number = 6;
-                break;
-            case "Psychic":
-                number = 11;
-                break;
-            case "Dragon":
-                number = 15;
-                break;
-            case "Dark":
-                number = 16;
-                break;
-            default:
-                number = 18;
-                break;
-        }
-        return number;
+        return switch (pokemon.getTypeName()) {
+            case "Normal" -> 1;
+            case "Fighting" -> 7;
+            case "Poison" -> 8;
+            case "Ground" -> 9;
+            case "Flying" -> 10;
+            case "Bug" -> 12;
+            case "Rock" -> 13;
+            case "Ghost" -> 14;
+            case "Steel" -> 17;
+            case "Fire" -> 2;
+            case "Water" -> 3;
+            case "Electric" -> 4;
+            case "Grass" -> 5;
+            case "Ice" -> 6;
+            case "Psychic" -> 11;
+            case "Dragon" -> 15;
+            case "Dark" -> 16;
+            default -> 18;
+        };
     }
 
 }
