@@ -17,7 +17,7 @@ public class MonteCarlo {
         int i = 1;
         double favourable = 0;
         double total = 0;
-        while (i <= 100) {
+        while (i <= 1000) { // de modificat cu nr mai mare
             i++;
 
             Pokemon enemyPokemon = pokemonService.getNewPokemon();

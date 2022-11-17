@@ -39,18 +39,18 @@ public class BattleRound {
                 Integer enemySpecialPower = enemySpecialAttack.getPower();
                 if (playerStarts) {
                     enemyLife = enemyLife - (int) (10 * enemySpecialDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower);
+                    enemyPokemon.getHp().setValue(enemyLife);
                     if (enemyLife <= 0) {
                         return;
                     }
-                    enemyPokemon.getHp().setValue(enemyLife);
                     playerPokemon.getHp().setValue(playerLife - (int) (10 * playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower));
                 }
                 else {
                     playerLife = playerLife - (int) (10 * playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower);
+                    playerPokemon.getHp().setValue(playerLife);
                     if (playerLife <= 0) {
                         return;
                     }
-                    playerPokemon.getHp().setValue(playerLife);
                     enemyPokemon.getHp().setValue(enemyLife - (int) (10 * enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower));
                 }
             }
@@ -64,18 +64,18 @@ public class BattleRound {
                 Integer enemyPower = enemyAttack.getPower();
                 if (playerStarts) {
                     enemyLife = enemyLife - (int) (10 * enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower);
+                    enemyPokemon.getHp().setValue(enemyLife);
                     if (enemyLife <= 0) {
                         return;
                     }
-                    enemyPokemon.getHp().setValue(enemyLife);
                     playerPokemon.getHp().setValue(playerLife - (int) (10 * playerDefence * enemyAccuracy - multiplierForEnemy * enemyPower));
                 }
                 else {
                     playerLife = playerLife - (int) (10 * playerDefence * enemyAccuracy - multiplierForEnemy * enemyPower);
+                    playerPokemon.getHp().setValue(playerLife);
                     if (playerLife <= 0) {
                         return;
                     }
-                    playerPokemon.getHp().setValue(playerLife);
                     enemyPokemon.getHp().setValue(enemyLife - (int) (10 * enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower));
                 }
             }
@@ -95,18 +95,18 @@ public class BattleRound {
                 Integer enemySpecialPower = enemySpecialAttack.getPower();
                 if (playerStarts) {
                     enemyLife = enemyLife - (int) (10 * enemyDefence * playerAccuracy - multiplierForPlayer * playerPower);
+                    enemyPokemon.getHp().setValue(enemyLife);
                     if (enemyLife <= 0) {
                         return;
                     }
-                    enemyPokemon.getHp().setValue(enemyLife);
                     playerPokemon.getHp().setValue(playerLife - (int) (10 * playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower));
                 }
                 else {
                     playerLife = playerLife - (int) (10 * playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower);
+                    playerPokemon.getHp().setValue(playerLife);
                     if (playerLife <= 0) {
                         return;
                     }
-                    playerPokemon.getHp().setValue(playerLife);
                     enemyPokemon.getHp().setValue(enemyLife - (int) (10 * enemyDefence * playerAccuracy - multiplierForPlayer * playerPower));
                 }
             }
@@ -119,18 +119,18 @@ public class BattleRound {
 
                 if (playerStarts) {
                     enemyLife = enemyLife - (int) (10 * enemyDefence * playerAccuracy - multiplierForPlayer * playerPower);
+                    enemyPokemon.getHp().setValue(enemyLife);
                     if (enemyLife <= 0) {
                         return;
                     }
-                    enemyPokemon.getHp().setValue(enemyLife);
                     playerPokemon.getHp().setValue(playerLife - (int) (10 * playerDefence * enemyAccuracy - multiplierForEnemy * enemyAttack.getPower()));
                 }
                 else {
                     playerLife = playerLife - (int) (10 * playerDefence * enemyAccuracy - multiplierForEnemy * enemyAttack.getPower());
+                    playerPokemon.getHp().setValue(playerDefence);
                     if (playerLife <= 0) {
                         return;
                     }
-                    playerPokemon.getHp().setValue(playerDefence);
                     enemyPokemon.getHp().setValue(enemyLife - (int) (10 * enemyDefence * playerAccuracy - multiplierForPlayer * playerPower));
                 }
             }
