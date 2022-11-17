@@ -79,7 +79,7 @@ public class MonteCarlo {
 		System.out.println((nr == 1 ? "Player pokemon:\n" : "Enemy Pokemon:\n")
 						+ "\n| HP:" + pokemon.getHp().getValue()
 						+ "\n| Speed: " + pokemon.getSpeed().getValue()
-						+ "\n| Type: " + (typeOfPlayer instanceof Special ? ((Special) typeOfPlayer).getName() : ((Physical) typeOfPlayer).getName())
+						+ "\n| Type: " + pokemon.getTypeName() + (pokemon.getType() instanceof Special ? " (Special)" : " (Physical)")
 						+ (typeOfPlayer instanceof Special
 						? "\n| Special Attack 1: " + ((Special) typeOfPlayer).getSpecialAttack1().getPower() + "\n\t| Accuracy: " + ((Special) typeOfPlayer).getSpecialAttack1().getAccuracy().getValue()
 						: "\n| Physical Attack 1: " + ((Physical) typeOfPlayer).getAttack1().getPower() + "\n\t| Accuracy: " + ((Physical) typeOfPlayer).getAttack1().getAccuracy().getValue()
