@@ -23,6 +23,13 @@ public class BattleRound {
         Integer enemySpecialDefence = enemyPokemon.getSpecialDefence().getStrength();
         Integer enemyDefence = enemyPokemon.getDefence().getStrength();
 
+        if (playerStarts) {
+            System.out.println("Player HP: " + playerLife + "\nEnemy HP: "+ enemyLife);
+        }
+        else {
+            System.out.println("Enemy HP: "+ enemyLife + "\nPlayer HP: " + playerLife);
+        }
+
         if (playerPokemon.getType() instanceof Special) {
 
             playerSpecialAttack = getRandomSpecialAttack(playerPokemon);
@@ -38,20 +45,34 @@ public class BattleRound {
 
                 Integer enemySpecialPower = enemySpecialAttack.getPower();
                 if (playerStarts) {
-                    enemyLife = enemyLife - (int) (10 * enemySpecialDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower);
-                    enemyPokemon.getHp().setValue(enemyLife);
-                    if (enemyLife <= 0) {
+                    var decreaseLife = (int) (enemySpecialDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower);
+                    decreaseOrIncreaseLife(decreaseLife, enemyPokemon, enemyLife);
+
+                    System.out.println("\n\t=> Enemy HP: " + enemyPokemon.getHp().getValue());
+
+                    if (enemyPokemon.getHp().getValue() <= 0) {
                         return;
                     }
-                    playerPokemon.getHp().setValue(playerLife - (int) (10 * playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower));
+                    decreaseLife = (int) (playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower);
+                    decreaseOrIncreaseLife(decreaseLife, playerPokemon, playerLife);
+
+                    System.out.println("\n\t=> Player HP: " + playerPokemon.getHp().getValue());
+
                 }
                 else {
-                    playerLife = playerLife - (int) (10 * playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower);
-                    playerPokemon.getHp().setValue(playerLife);
-                    if (playerLife <= 0) {
+                    var decreaseLife = (int) (playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower);
+                    decreaseOrIncreaseLife(decreaseLife, playerPokemon, playerLife);
+
+                    System.out.println("\n\t=> Player HP: " + playerPokemon.getHp().getValue());
+
+                    if (playerPokemon.getHp().getValue() <= 0) {
                         return;
                     }
-                    enemyPokemon.getHp().setValue(enemyLife - (int) (10 * enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower));
+                    decreaseLife = enemyLife - (int) (enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower);
+                    decreaseOrIncreaseLife(decreaseLife, enemyPokemon, enemyLife);
+
+                    System.out.println("\n\t=> Enemy HP: " + enemyPokemon.getHp().getValue());
+
                 }
             }
             else {
@@ -63,20 +84,33 @@ public class BattleRound {
 
                 Integer enemyPower = enemyAttack.getPower();
                 if (playerStarts) {
-                    enemyLife = enemyLife - (int) (10 * enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower);
-                    enemyPokemon.getHp().setValue(enemyLife);
-                    if (enemyLife <= 0) {
+                    var decreaseLife = (int) (enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower);
+                    decreaseOrIncreaseLife(decreaseLife, enemyPokemon, enemyLife);
+
+                    System.out.println("\n\t=> Enemy HP: " + enemyPokemon.getHp().getValue());
+
+                    if (enemyPokemon.getHp().getValue() <= 0) {
                         return;
                     }
-                    playerPokemon.getHp().setValue(playerLife - (int) (10 * playerDefence * enemyAccuracy - multiplierForEnemy * enemyPower));
+                    decreaseLife = (int) (playerDefence * enemyAccuracy - multiplierForEnemy * enemyPower);
+                    decreaseOrIncreaseLife(decreaseLife, playerPokemon, playerLife);
+
+                    System.out.println("\n\t=> Player HP: " + playerPokemon.getHp().getValue());
+
                 }
                 else {
-                    playerLife = playerLife - (int) (10 * playerDefence * enemyAccuracy - multiplierForEnemy * enemyPower);
-                    playerPokemon.getHp().setValue(playerLife);
-                    if (playerLife <= 0) {
+                    var decreaseLife = (int) (playerDefence * enemyAccuracy - multiplierForEnemy * enemyPower);
+                    decreaseOrIncreaseLife(decreaseLife, playerPokemon, playerLife);
+
+                    System.out.println("\n\t=> Player HP: " + playerPokemon.getHp().getValue());
+
+                    if (playerPokemon.getHp().getValue() <= 0) {
                         return;
                     }
-                    enemyPokemon.getHp().setValue(enemyLife - (int) (10 * enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower));
+                    decreaseLife = (int) (enemyDefence * playerSpecialAccuracy - multiplierForPlayer * playerScpecialPower);
+                    decreaseOrIncreaseLife(decreaseLife, enemyPokemon, enemyLife);
+
+                    System.out.println("\n\t=> Enemy HP: " + enemyPokemon.getHp().getValue());
                 }
             }
         }
@@ -94,20 +128,34 @@ public class BattleRound {
 
                 Integer enemySpecialPower = enemySpecialAttack.getPower();
                 if (playerStarts) {
-                    enemyLife = enemyLife - (int) (10 * enemyDefence * playerAccuracy - multiplierForPlayer * playerPower);
-                    enemyPokemon.getHp().setValue(enemyLife);
-                    if (enemyLife <= 0) {
+                    var decreaseLife = (int) (enemyDefence * playerAccuracy - multiplierForPlayer * playerPower);
+                    decreaseOrIncreaseLife(decreaseLife, enemyPokemon, enemyLife);
+
+                    System.out.println("\n\t=> Enemy HP: " + enemyPokemon.getHp().getValue());
+
+                    if (enemyPokemon.getHp().getValue() <= 0) {
                         return;
                     }
-                    playerPokemon.getHp().setValue(playerLife - (int) (10 * playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower));
+                    decreaseLife = (int) (playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower);
+                    decreaseOrIncreaseLife(decreaseLife, playerPokemon, playerLife);
+
+                    System.out.println("\n\t=> Player HP: " + playerPokemon.getHp().getValue());
+
                 }
                 else {
-                    playerLife = playerLife - (int) (10 * playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower);
-                    playerPokemon.getHp().setValue(playerLife);
-                    if (playerLife <= 0) {
+                    var decreaseLife = (int) (playerSpecialDefence * enemySpecialAccuracy - multiplierForEnemy * enemySpecialPower);
+                    decreaseOrIncreaseLife(decreaseLife, playerPokemon, playerLife);
+
+                    System.out.println("\n\t=> Player HP: " + playerPokemon.getHp().getValue());
+
+                    if (playerPokemon.getHp().getValue() <= 0) {
                         return;
                     }
-                    enemyPokemon.getHp().setValue(enemyLife - (int) (10 * enemyDefence * playerAccuracy - multiplierForPlayer * playerPower));
+                    decreaseLife = (int) (enemyDefence * playerAccuracy - multiplierForPlayer * playerPower);
+                    decreaseOrIncreaseLife(decreaseLife, enemyPokemon, enemyLife);
+
+                    System.out.println("\n\t=> Enemy HP: " + enemyPokemon.getHp().getValue());
+
                 }
             }
             else {
@@ -118,22 +166,48 @@ public class BattleRound {
                 double enemyAccuracy = 1 - enemyAttack.getAccuracy().getValue();
 
                 if (playerStarts) {
-                    enemyLife = enemyLife - (int) (10 * enemyDefence * playerAccuracy - multiplierForPlayer * playerPower);
-                    enemyPokemon.getHp().setValue(enemyLife);
-                    if (enemyLife <= 0) {
+                    var decreaseLife = (int) (enemyDefence * playerAccuracy - multiplierForPlayer * playerPower);
+                    decreaseOrIncreaseLife(decreaseLife, enemyPokemon, enemyLife);
+
+                    System.out.println("\n\t=> Enemy HP: " + enemyPokemon.getHp().getValue());
+
+                    if (enemyPokemon.getHp().getValue() <= 0) {
                         return;
                     }
-                    playerPokemon.getHp().setValue(playerLife - (int) (10 * playerDefence * enemyAccuracy - multiplierForEnemy * enemyAttack.getPower()));
+                    decreaseLife = (int) (playerDefence * enemyAccuracy - multiplierForEnemy * enemyAttack.getPower());
+                    decreaseOrIncreaseLife(decreaseLife, playerPokemon, playerLife);
+
+                    System.out.println("\n\t=> Player HP: " + playerPokemon.getHp().getValue());
+
                 }
                 else {
-                    playerLife = playerLife - (int) (10 * playerDefence * enemyAccuracy - multiplierForEnemy * enemyAttack.getPower());
                     playerPokemon.getHp().setValue(playerDefence);
-                    if (playerLife <= 0) {
+                    var decreaseLife = (int) (playerDefence * enemyAccuracy - multiplierForEnemy * enemyAttack.getPower());
+                    decreaseOrIncreaseLife(decreaseLife, playerPokemon, playerLife);
+
+                    System.out.println("\n\t=> Player HP: " + playerPokemon.getHp().getValue());
+
+                    if (playerPokemon.getHp().getValue() <= 0) {
                         return;
                     }
-                    enemyPokemon.getHp().setValue(enemyLife - (int) (10 * enemyDefence * playerAccuracy - multiplierForPlayer * playerPower));
+                    decreaseLife = (int) (enemyDefence * playerAccuracy - multiplierForPlayer * playerPower);
+                    decreaseOrIncreaseLife(decreaseLife, enemyPokemon, enemyLife);
+
+                    System.out.println("\n\t=> Enemy HP: " + enemyPokemon.getHp().getValue());
+
                 }
             }
+        }
+    }
+
+    private void decreaseOrIncreaseLife(int decreaseLife, Pokemon pokemon, int enemyLife) {
+        if (decreaseLife < 0) {
+            enemyLife += decreaseLife;
+            pokemon.getHp().setValue(enemyLife);
+        }
+        else {
+            enemyLife -= decreaseLife;
+            pokemon.getHp().setValue(enemyLife);
         }
     }
 
